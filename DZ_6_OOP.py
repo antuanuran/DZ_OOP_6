@@ -179,7 +179,7 @@ print(student1 < student2)
 print(Student.list_stud_all)
 print(student1.grades)
 
-
+"первый комит - оригинальный код"
 
 
 
