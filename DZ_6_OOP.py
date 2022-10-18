@@ -112,12 +112,15 @@ class Reviewer (Mentor):
 student1 = Student('Антон', 'Уранов', 'Муж.')
 student1.courses_in_progress.append('Python1')
 student1.courses_in_progress.append('Python2')
-
 student1.courses_in_progress.append('Java')
 
 
 student2 = Student('Иван', 'Иванов', 'Муж.')
 student2.courses_in_progress.append('Python1')
+student2.courses_in_progress.append('Python2')
+
+
+
 
 #2. Лекторы
 lector1 = Lecturer('Владимир', 'Лекторов')
@@ -144,10 +147,11 @@ rev1.rate_grade(student1, 'Python1', 9)
 rev1.rate_grade(student1, 'Python2', 3)
 rev1.rate_grade(student1, 'Python2', 5)
 
-
-
 rev1.rate_grade(student2, 'Python1', 5)
 rev1.rate_grade(student2, 'Python1', 5)
+
+rev1.rate_grade(student2, 'Python2', 10)
+rev1.rate_grade(student2, 'Python2', 8)
 
 #2. Студент ставит оценку Лекторам
 student1.grade_lect(lector1, 'Python1', 5)
@@ -160,28 +164,111 @@ student1.grade_lect(lector2, 'Python1', 8)
 
 
 # ВЫВОДИМ РЕЗУЛЬТАТЫ*********************************************************
+print("\n1. Выводим данные Cтудентов, Ревьюеров и Лекторов:\n")
 rev1.__str__()
 rev2.__str__()
+
+print("__________________")
 
 lector1.__str__()
 lector2.__str__()
 
+print("__________________")
 
 student1.__str__()
 student2.__str__()
 
+print("__________________")
+
+
 # Выводим сравнение Лекторов и Студентов по оценкам
-print(lector1 < lector2)
-print(student1 < student2)
+print("\n2. Сравниваем средние оценки лекторов и студентов:\n")
+if (lector1 < lector2):
+    print(f'Средняя оценка лектора по имени {lector1.name} < оценки лектора по имени {lector2.name}')
+else:
+    print(f'Средняя оценка лектора по имени {lector1.name} > оценки лектора по имени {lector2.name}')
 
-#Проверка списка и словаря
 
-print(Student.list_stud_all)
-print(student1.grades)
 
-"первый комит - оригинальный код"
+if (student1 < student2):
+    print(f'Средняя оценка студента по имени {student1.name} < оценки лектора по имени {student2.name}')
+else:
+    print(f'Средняя оценка студента по имени {student1.name} > оценки лектора по имени {student2.name}')
 
-"добавил второй коммит для проверки"
+print("__________________")
+
+
+
+#Итоговые функции
+print("\n3. Выводим средние оценки Студентам и Лекторам:\n")
+
+# 1_Функция - Средняя оценка студентов
+
+
+list_stud = [student1, student2]
+
+def f_sred_stud (list_stud, course):
+    i = 0
+    r_g = 0
+    count = 0
+    for res in list_stud:
+        ocenka = list_stud[i].grades[course]
+        sum_grade = sum(ocenka)
+        lenght_list = len(ocenka)
+        result = sum_grade / lenght_list
+
+        # для проверки оценок:
+        print(f'Cредняя оценка Студента по имени {list_stud[i].name} : {result}')
+
+        r_g += result
+        count += 1
+        i += 1
+
+
+    itog = r_g / count
+    print(f'Средняя оценка за домашние задания по всем Cтудентам в рамках курса: {course} составляет: {itog}\n')
+
+# 2_Функция средняя оценка Лекторов
+
+list_lec = [lector1, lector2]
+
+def f_sred_lect (list_lec, course):
+    i = 0
+    r_g = 0
+    count = 0
+    for res in list_lec:
+        ocenka = list_lec[i].grade_lect[course]
+        sum_grade = sum(ocenka)
+        lenght_list = len(ocenka)
+        result = sum_grade / lenght_list
+
+        # для проверки оценок:
+        print(f'Cредняя оценка Лектора по имени {list_lec[i].name} : {result}')
+
+        r_g += result
+        count += 1
+        i += 1
+
+
+    itog = r_g / count
+    print(f'Средняя оценка всем Лекторам в рамках курса: {course} составляет: {itog}\n')
+
+
+#Запуск функций
+
+
+
+
+
+f_sred_stud(list_stud, 'Python1')
+f_sred_lect(list_lec, 'Python1')
+
+
+
+
+
+
+
 
 
 
